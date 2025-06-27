@@ -1,60 +1,6 @@
 [
   {
-    "timestamp": "2025-06-27T08:06:47.563342",
-    "type": "folder_monitor",
-    "monitor_id": null,
-    "remote_path": "/documents",
-    "new_files_count": 2,
-    "created_tasks": 2,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T08:14:35.732159",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1750983274970",
-    "remote_path": "/images",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images",
-    "is_first_run": true,
-    "files_to_download": 2,
-    "created_tasks": 2,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T08:14:35.737099",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1750983274970",
-    "remote_path": "/images",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images",
-    "is_first_run": true,
-    "files_to_download": 2,
-    "created_tasks": 2,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T08:14:35.763021",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1750983274970",
-    "remote_path": "/images",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images",
-    "is_first_run": true,
-    "files_to_download": 2,
-    "created_tasks": 2,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T13:03:41.534440",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1751000621276",
-    "remote_path": "/documents",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents",
-    "is_first_run": true,
-    "files_to_download": 2,
-    "downloaded_files": 2,
-    "failed_files": 0,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T13:08:41.714148",
+    "timestamp": "2025-06-27T17:14:18.007327",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -66,7 +12,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:08:41.718137",
+    "timestamp": "2025-06-27T17:14:18.777824",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -78,7 +24,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:08:42.476144",
+    "timestamp": "2025-06-27T17:14:19.011579",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -90,7 +36,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:13:41.898328",
+    "timestamp": "2025-06-27T17:14:19.498656",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -102,7 +48,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:13:43.252193",
+    "timestamp": "2025-06-27T17:19:18.244683",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -114,7 +60,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:13:43.267538",
+    "timestamp": "2025-06-27T17:19:18.972942",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -126,7 +72,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:19:02.088011",
+    "timestamp": "2025-06-27T17:19:19.246339",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -138,7 +84,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:24:02.269819",
+    "timestamp": "2025-06-27T17:19:19.263264",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -150,7 +96,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:24:02.902737",
+    "timestamp": "2025-06-27T17:19:19.679409",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -162,7 +108,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:29:03.474437",
+    "timestamp": "2025-06-27T17:24:18.371951",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -174,7 +120,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:29:03.476922",
+    "timestamp": "2025-06-27T17:24:19.113451",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -186,7 +132,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:29:03.874536",
+    "timestamp": "2025-06-27T17:24:19.398708",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -198,7 +144,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:34:03.660913",
+    "timestamp": "2025-06-27T17:24:19.831697",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -210,7 +156,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:34:04.067538",
+    "timestamp": "2025-06-27T17:29:18.535172",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -222,7 +168,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:39:04.470166",
+    "timestamp": "2025-06-27T17:29:19.253712",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -234,7 +180,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:39:04.473159",
+    "timestamp": "2025-06-27T17:29:19.534721",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -246,7 +192,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:39:04.593521",
+    "timestamp": "2025-06-27T17:29:19.956713",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -258,7 +204,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:39:05.095183",
+    "timestamp": "2025-06-27T17:34:18.694087",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -270,7 +216,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:39:05.108550",
+    "timestamp": "2025-06-27T17:34:19.412462",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -282,7 +228,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:44:04.786642",
+    "timestamp": "2025-06-27T17:34:19.702077",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -294,7 +240,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:44:05.246082",
+    "timestamp": "2025-06-27T17:34:20.145032",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",
@@ -306,43 +252,7 @@
     "total_files": 2
   },
   {
-    "timestamp": "2025-06-27T13:49:04.881053",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1751000621276",
-    "remote_path": "/documents",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents",
-    "is_first_run": false,
-    "files_to_download": 0,
-    "downloaded_files": 0,
-    "failed_files": 0,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T13:49:05.416372",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1751000621276",
-    "remote_path": "/documents",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents",
-    "is_first_run": false,
-    "files_to_download": 0,
-    "downloaded_files": 0,
-    "failed_files": 0,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T13:54:04.948825",
-    "type": "folder_monitor",
-    "monitor_id": "monitor_1751000621276",
-    "remote_path": "/documents",
-    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents",
-    "is_first_run": false,
-    "files_to_download": 0,
-    "downloaded_files": 0,
-    "failed_files": 0,
-    "total_files": 2
-  },
-  {
-    "timestamp": "2025-06-27T13:54:05.584353",
+    "timestamp": "2025-06-27T17:34:20.145032",
     "type": "folder_monitor",
     "monitor_id": "monitor_1751000621276",
     "remote_path": "/documents",

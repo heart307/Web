@@ -94,7 +94,7 @@ async function loadTasks() {
         if (tbody) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="8" class="text-center text-danger">
+                    <td colspan="10" class="text-center text-danger">
                         <i class="bi bi-exclamation-triangle"></i> 加载失败: ${error.message}
                     </td>
                 </tr>
@@ -111,7 +111,7 @@ function updateTasksTable() {
     if (tasksData.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="8" class="text-center text-muted">
+                <td colspan="10" class="text-center text-muted">
                     <div class="empty-state py-4">
                         <i class="bi bi-inbox fa-3x mb-3"></i>
                         <h6>暂无任务</h6>
@@ -161,6 +161,9 @@ function updateTasksTable() {
                         </div>
                     </td>
                     <td>
+                        <span class="badge bg-light text-dark">${task.created_by || 'unknown'}</span>
+                    </td>
+                    <td>
                         <small class="text-muted">${formatDateTime(task.created_at)}</small>
                     </td>
                     <td>
@@ -174,7 +177,7 @@ function updateTasksTable() {
             console.error(`Error rendering task ${index}:`, e, task);
             return `
                 <tr>
-                    <td colspan="8" class="text-center text-warning">
+                    <td colspan="10" class="text-center text-warning">
                         <small>任务 ${index + 1} 渲染失败: ${e.message}</small>
                     </td>
                 </tr>

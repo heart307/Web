@@ -37,10 +37,10 @@
       "status": "pending",
       "progress": 100.0,
       "created_at": "2025-06-27T13:03:41.276816",
-      "started_at": "2025-06-27T13:34:04.022817",
+      "started_at": "2025-06-27T17:29:19.933240",
       "completed_at": null,
-      "execution_count": 9,
-      "total_execution_time": 0.38531017303466797,
+      "execution_count": 62,
+      "total_execution_time": 2.231595277786255,
       "estimated_total_time": 0,
       "checkpoint_data": {
         "downloaded_files": 2,
@@ -52,9 +52,9 @@
       "result": "监控完成: 发现 0 个新文件，成功下载 0 个，失败 0 个",
       "created_by": "admin",
       "time_slice": 60.0,
-      "current_worker": "TaskWorker-1",
-      "last_execution": "2025-06-27T13:34:04.073088",
-      "next_execution": "2025-06-27T13:39:04.073088"
+      "current_worker": "TaskWorker-2",
+      "last_execution": "2025-06-27T17:29:19.956713",
+      "next_execution": "2025-06-27T17:34:19.956713"
     },
     "task_1751002584874": {
       "id": "task_1751002584874",
@@ -84,23 +84,24 @@
       "priority": "medium",
       "task_type": "folder_download",
       "file_size": null,
-      "status": "running",
-      "progress": 50.0,
+      "status": "completed",
+      "progress": 100.0,
       "created_at": "2025-06-27T13:36:24.874505",
       "started_at": "2025-06-27T13:36:25.722109",
-      "completed_at": null,
+      "completed_at": "2025-06-27T13:36:25.801258",
       "execution_count": 2,
-      "total_execution_time": 0.0,
+      "total_execution_time": 0.15034842491149902,
       "estimated_total_time": 0,
       "checkpoint_data": {
         "processed_files": [
-          "downloads_file_2.txt"
+          "downloads_file_2.txt",
+          "downloads_file_3.txt"
         ],
-        "downloaded_count": 1,
+        "downloaded_count": 2,
         "total_files": 2
       },
       "error": null,
-      "result": null,
+      "result": "文件夹下载完成: 2 个文件",
       "created_by": "admin",
       "time_slice": 150.0,
       "current_worker": "TaskWorker-3"

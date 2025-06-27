@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+
+{% block title %}站点管理 - FTP Web System{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800">FTP站点管理</h1>
+    <button class="btn btn-primary" onclick="showAddSiteModal()">
+        <i class="bi bi-plus-circle me-2"></i>添加站点
+    </button>
+</div>
+
+<!-- 站点统计卡片 -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            总站点数
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="total-sites-count">0</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-server fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            已连接
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="connected-sites-count">0</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-wifi fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            已断开
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="disconnected-sites-count">0</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-wifi-off fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            分组数
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="groups-count">0</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-collection fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 站点列表 -->
+<div class="card shadow">
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">站点列表</h6>
+        <div class="d-flex gap-2">
+            <div class="dropdown">
+                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="bi bi-funnel me-1"></i>筛选
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#" onclick="filterSites('all')">全部站点</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterSites('connected')">已连接</a></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterSites('disconnected')">已断开</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#" onclick="filterSites('group')">按分组筛选</a></li>
+                </ul>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" onclick="refreshSites()">
+                <i class="bi bi-arrow-clockwise me-1"></i>刷新
+            </button>
+            <button class="btn btn-sm btn-warning" onclick="testAllConnections()">
+                <i class="bi bi-wifi me-1"></i>测试全部
+            </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>站点名称</th>
+                        <th>主机地址</th>
+                        <th>协议</th>
+                        <th>分组</th>
+                        <th>连接状态</th>
+                        <th>最后检查</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="sites-tbody">
+                    <tr>
+                        <td colspan="7" class="text-center text-muted">
+                            <i class="bi bi-hourglass-split"></i> 加载中...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 站点详情模态框 -->
+<div class="modal fade" id="siteDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">站点详情</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>基本信息</h6>
+                        <table class="table table-sm">
+                            <tr><td>站点名称:</td><td id="detail-name">-</td></tr>
+                            <tr><td>主机地址:</td><td id="detail-host">-</td></tr>
+                            <tr><td>端口:</td><td id="detail-port">-</td></tr>
+                            <tr><td>用户名:</td><td id="detail-username">-</td></tr>
+                            <tr><td>协议:</td><td id="detail-protocol">-</td></tr>
+                            <tr><td>分组:</td><td id="detail-group">-</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>状态信息</h6>
+                        <table class="table table-sm">
+                            <tr><td>连接状态:</td><td id="detail-status">-</td></tr>
+                            <tr><td>最后检查:</td><td id="detail-last-check">-</td></tr>
+                            <tr><td>连接时间:</td><td id="detail-connection-time">-</td></tr>
+                            <tr><td>创建者:</td><td id="detail-created-by">-</td></tr>
+                            <tr><td>创建时间:</td><td id="detail-created-at">-</td></tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <h6>目录浏览</h6>
+                    <div class="input-group mb-2">
+                        <input type="text" class="form-control" id="browse-path" value="/" placeholder="输入路径">
+                        <button class="btn btn-outline-secondary" onclick="browseSiteDirectory()">
+                            <i class="bi bi-folder2-open"></i> 浏览
+                        </button>
+                    </div>
+                    <div id="directory-listing" class="border rounded p-2" style="max-height: 200px; overflow-y: auto;">
+                        <div class="text-muted text-center">点击浏览按钮查看目录内容</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-warning" onclick="testSiteConnection()">
+                    <i class="bi bi-wifi"></i> 测试连接
+                </button>
+                <button type="button" class="btn btn-primary" onclick="editSite()">
+                    <i class="bi bi-pencil"></i> 编辑
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑站点模态框 -->
+<div class="modal fade" id="editSiteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">编辑站点</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editSiteForm">
+                    <input type="hidden" id="edit-site-id">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">站点名称</label>
+                        <input type="text" class="form-control" id="edit-site-name" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label">主机地址</label>
+                                <input type="text" class="form-control" id="edit-site-host" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">端口</label>
+                                <input type="number" class="form-control" id="edit-site-port">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="edit-site-username">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="edit-site-password" placeholder="留空表示不修改">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">协议</label>
+                                <select class="form-select" id="edit-site-protocol">
+                                    <option value="ftp">FTP</option>
+                                    <option value="ftps">FTPS</option>
+                                    <option value="sftp">SFTP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">分组</label>
+                                <input type="text" class="form-control" id="edit-site-group">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-danger me-auto" onclick="deleteSite()">
+                    <i class="bi bi-trash"></i> 删除
+                </button>
+                <button type="button" class="btn btn-primary" onclick="updateSite()">
+                    <i class="bi bi-check"></i> 保存
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/sites.js') }}"></script>
+{% endblock %}

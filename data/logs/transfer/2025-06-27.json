@@ -1,0 +1,83 @@
+[
+  {
+    "timestamp": "2025-06-27T07:58:45.731830",
+    "type": "folder_download",
+    "task_id": "task_1750982325231",
+    "remote_path": "/documents",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+    "file_count": 2,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:06:47.607463",
+    "type": "download",
+    "task_id": "task_1750982807554",
+    "remote_path": "/documents/documents_file_2.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents_file_2.txt",
+    "file_size": 154,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:06:47.640993",
+    "type": "download",
+    "task_id": "task_1750982807559",
+    "remote_path": "/documents/documents_file_3.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\documents_file_3.txt",
+    "file_size": 174,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:14:36.247114",
+    "type": "download",
+    "task_id": "task_1750983275639",
+    "remote_path": "/images/images_file_2.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images\\images_file_2.txt",
+    "file_size": 148,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:14:36.283744",
+    "type": "download",
+    "task_id": "task_1750983275677",
+    "remote_path": "/images/images_file_2.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images\\images_file_2.txt",
+    "file_size": 148,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:14:36.524707",
+    "type": "download",
+    "task_id": "task_1750983275724",
+    "remote_path": "/images/images_file_3.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images\\images_file_3.txt",
+    "file_size": 168,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T08:14:36.527840",
+    "type": "download",
+    "task_id": "task_1750983275715",
+    "remote_path": "/images/images_file_3.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads\\images\\images_file_3.txt",
+    "file_size": 168,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T13:36:25.797088",
+    "type": "folder_download",
+    "task_id": "task_1751002584874",
+    "remote_path": "/downloads",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+    "file_count": 2,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-27T13:36:25.799796",
+    "type": "folder_download",
+    "task_id": "task_1751002584874",
+    "remote_path": "/downloads",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+    "file_count": 2,
+    "status": "completed"
+  }
+]

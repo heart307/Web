@@ -1,0 +1,208 @@
+/* 仪表板专用样式 */
+
+/* 统计卡片动画 */
+.card.shadow {
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.card.shadow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.2) !important;
+}
+
+/* 统计数字动画 */
+.h5.mb-0 {
+    transition: color 0.3s ease-in-out;
+}
+
+/* 图标样式 */
+.fa-2x {
+    font-size: 2em !important;
+}
+
+/* 最近任务表格 */
+#recent-tasks-tbody tr {
+    transition: background-color 0.15s ease-in-out;
+}
+
+#recent-tasks-tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+}
+
+/* 系统状态进度条 */
+.progress {
+    height: 8px;
+    margin-top: 4px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* 快速操作按钮 */
+.btn.w-100 {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn.w-100:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn.w-100 i {
+    font-size: 1.2em;
+}
+
+/* 状态指示器 */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-online {
+    background-color: rgba(28, 200, 138, 0.1);
+    color: #1cc88a;
+}
+
+.status-offline {
+    background-color: rgba(231, 74, 59, 0.1);
+    color: #e74a3b;
+}
+
+.status-warning {
+    background-color: rgba(246, 194, 62, 0.1);
+    color: #f6c23e;
+}
+
+/* 实时更新动画 */
+.updating {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* 数据加载状态 */
+.loading-placeholder {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+    height: 1rem;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .btn.w-100 {
+        height: 50px;
+        font-size: 0.875rem;
+    }
+    
+    .btn.w-100 i {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .h5.mb-0 {
+        font-size: 1.1rem;
+    }
+    
+    .text-xs {
+        font-size: 0.65rem;
+    }
+    
+    .btn.w-100 {
+        height: 45px;
+        font-size: 0.8rem;
+    }
+    
+    .card-body {
+        padding: 1rem 0.75rem;
+    }
+}
+
+/* 图表容器 */
+.chart-container {
+    position: relative;
+    height: 300px;
+    margin: 1rem 0;
+}
+
+/* 空状态样式 */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h5 {
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.empty-state p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+/* 刷新按钮动画 */
+.btn-refresh {
+    transition: transform 0.3s ease;
+}
+
+.btn-refresh.refreshing {
+    transform: rotate(360deg);
+}
+
+/* 连接状态点 */
+.connection-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+    animation: blink 2s infinite;
+}
+
+.connection-dot.connected {
+    background-color: #28a745;
+}
+
+.connection-dot.disconnected {
+    background-color: #dc3545;
+}
+
+.connection-dot.unknown {
+    background-color: #6c757d;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}

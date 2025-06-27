@@ -1,0 +1,550 @@
+<!-- 创建任务模态框 -->
+<div class="modal fade" id="createTaskModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">创建传输任务</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createTaskForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">任务类型</label>
+                                <select class="form-select" id="taskType" name="taskType" required>
+                                    <option value="">请选择任务类型</option>
+                                    <option value="file_download">文件下载</option>
+                                    <option value="file_upload">文件上传</option>
+                                    <option value="folder_download">文件夹下载</option>
+                                    <option value="folder_upload">文件夹上传</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">FTP站点</label>
+                                <select class="form-select" id="siteId" name="siteId" required>
+                                    <option value="">请选择FTP站点</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">远程路径</label>
+                                <input type="text" class="form-control" id="remotePath" name="remotePath" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">本地路径</label>
+                                <input type="text" class="form-control" id="localPath" name="localPath" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">优先级</label>
+                                <select class="form-select" id="priority" name="priority">
+                                    <option value="low">低</option>
+                                    <option value="medium" selected>中</option>
+                                    <option value="high">高</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitCreateTask()">创建任务</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加站点模态框 -->
+<div class="modal fade" id="addSiteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">添加FTP站点</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSiteForm">
+                    <div class="mb-3">
+                        <label class="form-label">站点名称</label>
+                        <input type="text" class="form-control" id="siteName" name="siteName" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label">主机地址</label>
+                                <input type="text" class="form-control" id="siteHost" name="siteHost" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">端口</label>
+                                <input type="number" class="form-control" id="sitePort" name="sitePort" value="21">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="siteUsername" name="siteUsername">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="sitePassword" name="sitePassword">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">协议</label>
+                                <select class="form-select" id="siteProtocol" name="siteProtocol">
+                                    <option value="ftp">FTP</option>
+                                    <option value="ftps">FTPS</option>
+                                    <option value="sftp">SFTP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">分组</label>
+                                <input type="text" class="form-control" id="siteGroup" name="siteGroup" value="默认分组">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-success" onclick="submitAddSite()">添加站点</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 创建监控模态框 -->
+<div class="modal fade" id="createMonitorModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">创建监控任务</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createMonitorForm">
+                    <div class="mb-3">
+                        <label class="form-label">监控名称</label>
+                        <input type="text" class="form-control" id="monitorName" name="monitorName" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">FTP站点</label>
+                        <select class="form-select" id="monitorSiteId" name="monitorSiteId" required>
+                            <option value="">请选择FTP站点</option>
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">远程路径</label>
+                                <input type="text" class="form-control" id="monitorRemotePath" name="monitorRemotePath" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">本地路径</label>
+                                <input type="text" class="form-control" id="monitorLocalPath" name="monitorLocalPath" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">文件模式</label>
+                                <input type="text" class="form-control" id="filePattern" name="filePattern" value="*" placeholder="例如: *.log">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">检查间隔(秒)</label>
+                                <input type="number" class="form-control" id="checkInterval" name="checkInterval" value="60" min="10">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">优先级</label>
+                        <select class="form-select" id="monitorPriority" name="monitorPriority">
+                            <option value="low">低</option>
+                            <option value="medium" selected>中</option>
+                            <option value="high">高</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info" onclick="submitCreateMonitor()">创建监控</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 日志查看模态框 -->
+<div class="modal fade" id="logsModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">系统日志</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <select class="form-select" id="logType">
+                            <option value="operations">操作日志</option>
+                            <option value="transfer">传输日志</option>
+                            <option value="monitor">监控日志</option>
+                            <option value="system">系统日志</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="logDate">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" onclick="loadLogs()">加载日志</button>
+                    </div>
+                </div>
+                
+                <div class="table-responsive" style="max-height: 400px;">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>类型</th>
+                                <th>内容</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-tbody">
+                            <tr>
+                                <td colspan="3" class="text-center text-muted">请选择日期并点击加载日志</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FTP浏览器模态框 -->
+<div class="modal fade" id="ftpBrowserModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-folder2-open me-2"></i>浏览FTP服务器创建任务
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 站点选择 -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">选择FTP站点</label>
+                        <select class="form-select" id="ftpSiteSelect" onchange="loadFTPDirectory()">
+                            <option value="">请选择站点...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">当前路径</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="ftpCurrentPath" value="/" readonly>
+                            <button class="btn btn-outline-secondary" onclick="loadFTPDirectory()" title="刷新目录">
+                                <i class="bi bi-arrow-clockwise"></i>
+                            </button>
+                            <button class="btn btn-outline-info" onclick="testSelectedSiteConnection()" title="测试连接">
+                                <i class="bi bi-wifi"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 路径导航 -->
+                <div class="mb-3">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb" id="ftpBreadcrumb">
+                            <li class="breadcrumb-item"><a href="#" onclick="navigateToPath('/')">/</a></li>
+                        </ol>
+                    </nav>
+                </div>
+
+                <!-- Windows资源管理器样式的文件浏览器 -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <!-- 工具栏 -->
+                            <div class="card-header p-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <!-- 导航按钮 -->
+                                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="navigateBack()" id="backBtn" disabled title="后退">
+                                            <i class="bi bi-arrow-left"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="navigateForward()" id="forwardBtn" disabled title="前进">
+                                            <i class="bi bi-arrow-right"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="navigateUp()" id="upBtn" disabled title="向上">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+
+                                        <!-- 视图切换 -->
+                                        <div class="btn-group me-2" role="group">
+                                            <button class="btn btn-sm btn-outline-secondary active" onclick="setViewMode('list')" id="listViewBtn" title="列表视图">
+                                                <i class="bi bi-list-ul"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary" onclick="setViewMode('grid')" id="gridViewBtn" title="网格视图">
+                                                <i class="bi bi-grid-3x3-gap"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex align-items-center">
+                                        <!-- 选择操作 -->
+                                        <button class="btn btn-sm btn-outline-primary me-2" onclick="selectAll()">
+                                            <i class="bi bi-check-all"></i> 全选
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary me-2" onclick="clearSelection()">
+                                            <i class="bi bi-x-square"></i> 清除
+                                        </button>
+
+                                        <!-- 排序选项 -->
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" title="排序">
+                                                <i class="bi bi-sort-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="#" onclick="setSortMode('name')">按名称</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="setSortMode('size')">按大小</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="setSortMode('date')">按日期</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="setSortMode('type')">按类型</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#" onclick="toggleSortOrder()">
+                                                    <span id="sortOrderText">升序</span>
+                                                </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 地址栏 -->
+                            <div class="card-body p-2 border-bottom">
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-folder"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="addressBar" placeholder="输入路径..." onkeypress="handleAddressBarEnter(event)">
+                                    <button class="btn btn-outline-secondary" onclick="navigateToAddressBarPath()" title="转到">
+                                        <i class="bi bi-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 文件列表区域 -->
+                            <div class="card-body p-0">
+                                <!-- 列表视图表头 -->
+                                <div id="listViewHeader" class="border-bottom bg-light" style="display: block;">
+                                    <div class="row g-0 py-2 px-3 small fw-bold text-muted">
+                                        <div class="col-5">名称</div>
+                                        <div class="col-2">大小</div>
+                                        <div class="col-2">类型</div>
+                                        <div class="col-3">修改时间</div>
+                                    </div>
+                                </div>
+
+                                <!-- 文件列表容器 -->
+                                <div id="ftpFileList" style="height: 350px; overflow-y: auto;">
+                                    <div class="text-center text-muted p-4">
+                                        <i class="bi bi-folder2-open fa-3x mb-3"></i>
+                                        <h6>请选择FTP站点开始浏览</h6>
+                                        <p class="small">选择站点后将显示服务器文件和文件夹</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 状态栏 -->
+                            <div class="card-footer p-2 bg-light">
+                                <div class="d-flex justify-content-between align-items-center small text-muted">
+                                    <span id="statusInfo">就绪</span>
+                                    <span id="selectionInfo"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 任务配置面板 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">任务配置</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">任务类型</label>
+                                    <select class="form-select" id="ftpTaskType" onchange="updateTaskConfig()">
+                                        <option value="">请选择任务类型...</option>
+                                        <option value="file_download">文件下载</option>
+                                        <option value="folder_download">文件夹下载</option>
+                                        <option value="folder_monitor">文件夹监控</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">本地保存路径</label>
+                                    <input type="text" class="form-control" id="ftpLocalPath" placeholder="/downloads">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">任务优先级</label>
+                                    <select class="form-select" id="taskPriority">
+                                        <option value="medium">中等</option>
+                                        <option value="high">高</option>
+                                        <option value="low">低</option>
+                                    </select>
+                                </div>
+
+                                <!-- 文件夹监控特有配置 -->
+                                <div id="monitorConfig" style="display: none;">
+                                    <div class="mb-3">
+                                        <label class="form-label">监控间隔（秒）</label>
+                                        <input type="number" class="form-control" id="monitorInterval" value="300" min="60">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">文件过滤规则</label>
+                                        <input type="text" class="form-control" id="fileFilter" placeholder="*.txt,*.pdf">
+                                        <small class="form-text text-muted">用逗号分隔多个规则，支持通配符</small>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="autoStart" checked>
+                                        <label class="form-check-label" for="autoStart">
+                                            创建后自动开始
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" onclick="createTaskFromBrowser()" disabled id="createTaskBtn">
+                                        <i class="bi bi-plus-circle me-1"></i>创建任务
+                                    </button>
+                                </div>
+
+                                <!-- 调试信息 -->
+                                <div class="mt-2">
+                                    <button class="btn btn-sm btn-outline-secondary w-100" onclick="debugButtonState()">
+                                        <i class="bi bi-bug me-1"></i>调试按钮状态
+                                    </button>
+                                    <div id="debugInfo" class="small text-muted mt-1" style="display: none;"></div>
+                                </div>
+
+                                <!-- 选中项目显示 -->
+                                <div class="mt-3" id="selectedItems" style="display: none;">
+                                    <h6>已选择项目：</h6>
+                                    <div id="selectedItemsList" class="small text-muted"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-info" onclick="refreshFTPDirectory()">
+                    <i class="bi bi-arrow-clockwise me-1"></i>刷新目录
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 个人资料模态框 -->
+<div class="modal fade" id="profileModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">个人资料</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="profileForm">
+                    <div class="mb-3">
+                        <label class="form-label">用户名</label>
+                        <input type="text" class="form-control" id="profileUsername" readonly>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">角色</label>
+                        <input type="text" class="form-control" id="profileRole" readonly>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">默认下载路径</label>
+                        <input type="text" class="form-control" id="defaultDownloadPath">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">最大并发任务数</label>
+                        <input type="number" class="form-control" id="maxConcurrentTasks" min="1" max="10">
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">原密码</label>
+                        <input type="password" class="form-control" id="oldPassword">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">新密码</label>
+                        <input type="password" class="form-control" id="newPassword">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">确认新密码</label>
+                        <input type="password" class="form-control" id="confirmPassword">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="updateProfile()">保存更改</button>
+            </div>
+        </div>
+    </div>
+</div>

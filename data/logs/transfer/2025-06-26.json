@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2025-06-26T23:32:27.250921",
+    "type": "download",
+    "task_id": "task_1750951946535",
+    "remote_path": "/large_file.txt",
+    "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+    "file_size": 2542,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-26T23:40:01.168192",
+    "type": "download",
+    "task_id": "task_1750952400229",
+    "remote_path": "/log.txt",
+    "local_path": "C:\\log.txt",
+    "file_size": 92,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-26T23:40:01.186143",
+    "type": "download",
+    "task_id": "task_1750952400229",
+    "remote_path": "/log.txt",
+    "local_path": "C:\\log.txt",
+    "file_size": 92,
+    "status": "completed"
+  },
+  {
+    "timestamp": "2025-06-26T23:40:01.189136",
+    "type": "download",
+    "task_id": "task_1750952400229",
+    "remote_path": "/log.txt",
+    "local_path": "C:\\log.txt",
+    "file_size": 92,
+    "status": "completed"
+  }
+]

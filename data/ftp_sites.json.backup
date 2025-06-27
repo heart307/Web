@@ -1,0 +1,22 @@
+{
+  "sites": [
+    {
+      "id": "site_000003",
+      "name": "site1",
+      "host": "192.168.2.55",
+      "port": 2121,
+      "username": "admin",
+      "password": "YWRtaW4xMjM=",
+      "protocol": "ftp",
+      "group": "默认分组",
+      "status": "connected",
+      "last_check": "2025-06-26T23:32:06.131490",
+      "connection_time": 0.008002758026123047,
+      "last_error": null,
+      "created_by": "admin",
+      "created_at": "2025-06-26T15:22:22.729792",
+      "updated_at": "2025-06-26T19:41:07.930968"
+    }
+  ],
+  "site_counter": 4
+}

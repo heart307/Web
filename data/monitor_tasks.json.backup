@@ -1,0 +1,38 @@
+{
+  "monitors": [
+    {
+      "id": "monitor_1750983274970",
+      "name": "监控_/images",
+      "site_id": "site_000003",
+      "remote_path": "/images",
+      "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+      "priority": "medium",
+      "file_pattern": "*.*",
+      "check_interval": 300,
+      "status": "active",
+      "last_check": "2025-06-27T08:14:35.760010",
+      "file_list": [
+        "images_file_2.txt",
+        "images_file_3.txt"
+      ],
+      "created_by": "admin",
+      "created_at": "2025-06-27T08:14:34.970909"
+    },
+    {
+      "id": "monitor_1751000621276",
+      "name": "监控_/documents",
+      "site_id": "site_000003",
+      "remote_path": "/documents",
+      "local_path": "C:\\Users\\admin\\Documents\\augment-projects\\FTPWebSystem\\downloads",
+      "priority": "high",
+      "file_pattern": "*.*",
+      "check_interval": 300,
+      "status": "active",
+      "last_check": null,
+      "file_list": [],
+      "created_by": "admin",
+      "created_at": "2025-06-27T13:03:41.276816"
+    }
+  ],
+  "monitor_counter": 2
+}

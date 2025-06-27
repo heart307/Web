@@ -1,0 +1,109 @@
+[
+  {
+    "timestamp": "2025-06-27T07:58:45.239859",
+    "action": "create_task",
+    "task_id": "task_1750982325231",
+    "task_type": "folder_download",
+    "site_id": "site_000003",
+    "remote_path": "/documents",
+    "local_path": "/downloads",
+    "priority": "high",
+    "created_by": "admin",
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T08:00:26.442080",
+    "action": "create_task",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "created_by": "admin",
+    "status": "failed",
+    "error": "'TaskService' object has no attribute 'submit_folder_monitor'"
+  },
+  {
+    "timestamp": "2025-06-27T08:00:33.744607",
+    "action": "create_task",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "created_by": "admin",
+    "status": "failed",
+    "error": "'TaskService' object has no attribute 'submit_folder_monitor'"
+  },
+  {
+    "timestamp": "2025-06-27T08:00:46.998058",
+    "action": "create_task",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "created_by": "admin",
+    "status": "failed",
+    "error": "'TaskService' object has no attribute 'submit_folder_monitor'"
+  },
+  {
+    "timestamp": "2025-06-27T08:02:12.969082",
+    "action": "create_task",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "created_by": "admin",
+    "status": "failed",
+    "error": "'TaskService' object has no attribute 'submit_folder_monitor'"
+  },
+  {
+    "timestamp": "2025-06-27T08:06:46.794960",
+    "action": "create_task",
+    "task_id": "task_1750982806786",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "remote_path": "/documents",
+    "local_path": "/downloads",
+    "priority": "high",
+    "created_by": "admin",
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T08:14:34.978909",
+    "action": "create_task",
+    "task_id": "task_1750983274970",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "remote_path": "/images",
+    "local_path": "/downloads",
+    "priority": "medium",
+    "created_by": "admin",
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T13:03:41.276816",
+    "action": "create_task",
+    "task_id": "task_1751000621276",
+    "task_type": "folder_monitor",
+    "site_id": "site_000003",
+    "remote_path": "/documents",
+    "local_path": "/downloads",
+    "priority": "high",
+    "created_by": "admin",
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T13:20:54.757061",
+    "action": "connection_test",
+    "site_id": "site_000003",
+    "site_name": "site1",
+    "host": "192.168.2.55",
+    "status": "success",
+    "connection_time": 0.0033762454986572266,
+    "error": null,
+    "tested_by": "admin"
+  },
+  {
+    "timestamp": "2025-06-27T13:36:24.878493",
+    "action": "create_task",
+    "task_id": "task_1751002584874",
+    "task_type": "folder_download",
+    "site_id": "site_000003",
+    "remote_path": "/downloads",
+    "local_path": "/downloads",
+    "priority": "medium",
+    "created_by": "admin",
+    "status": "success"
+  }
+]

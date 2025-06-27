@@ -5,18 +5,20 @@
 """
 
 from flask import Blueprint, render_template, jsonify, current_app
-from app.views.auth import login_required
+from app.views.auth import login_required, check_user_status
 
 dashboard_bp = Blueprint('dashboard', __name__)
 
 @dashboard_bp.route('/')
 @login_required
+@check_user_status
 def index():
     """仪表板首页"""
     return render_template('dashboard.html')
 
 @dashboard_bp.route('/api/dashboard/stats')
 @login_required
+@check_user_status
 def get_dashboard_stats():
     """获取仪表板统计信息"""
     try:
@@ -61,14 +63,34 @@ def get_dashboard_stats():
 
 @dashboard_bp.route('/api/dashboard/recent-tasks')
 @login_required
+@check_user_status
 def get_recent_tasks():
     """获取最近的任务"""
     try:
+        # 获取当前用户信息
+        from flask import session
+        current_user = current_app.data_manager.find_user_by_username(session.get('username'))
+        if not current_user:
+            return jsonify({'error': '用户不存在'}), 404
+
         all_tasks = current_app.scheduler.get_all_tasks()
-        
+
+        # 根据用户权限过滤任务
+        user_permissions = current_user.get('permissions', {})
+        task_management = user_permissions.get('task_management', 'own')
+
+        filtered_tasks = []
+        for task in all_tasks:
+            # 权限过滤：普通用户只能看到自己的任务
+            if task_management == 'own':
+                if task.get('created_by') != session.get('username'):
+                    continue
+            # 管理员可以看到所有任务（task_management == 'all'）
+            filtered_tasks.append(task)
+
         # 按创建时间排序，获取最近10个任务
-        sorted_tasks = sorted(all_tasks, 
-                            key=lambda x: x.get('created_at', ''), 
+        sorted_tasks = sorted(filtered_tasks,
+                            key=lambda x: x.get('created_at', ''),
                             reverse=True)[:10]
         
         # 简化任务信息，但保留站点相关信息

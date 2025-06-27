@@ -144,10 +144,16 @@ class FTPClient:
         """列出目录内容"""
         if not self.ensure_connected():
             return []
-        
+
         try:
             files = []
-            
+
+            # 先切换到目标目录
+            if remote_path != "." and remote_path != self.get_current_directory():
+                if not self.change_directory(remote_path):
+                    print(f"无法切换到目录: {remote_path}")
+                    return []
+
             def parse_line(line):
                 # 解析LIST命令的输出
                 parts = line.split()
@@ -155,9 +161,13 @@ class FTPClient:
                     permissions = parts[0]
                     size = parts[4] if parts[4].isdigit() else 0
                     name = " ".join(parts[8:])
-                    
+
+                    # 跳过 . 和 .. 目录
+                    if name in ['.', '..']:
+                        return
+
                     is_dir = permissions.startswith('d')
-                    
+
                     files.append({
                         'name': name,
                         'size': int(size) if not is_dir else 0,
@@ -165,12 +175,14 @@ class FTPClient:
                         'permissions': permissions,
                         'raw_line': line
                     })
-            
-            self.ftp.retrlines(f'LIST {remote_path}', parse_line)
+
+            # 使用LIST命令列出当前目录内容
+            self.ftp.retrlines('LIST', parse_line)
             return files
-            
+
         except Exception as e:
             print(f"列出目录失败: {e}")
+            self.last_error = str(e)
             return []
     
     def change_directory(self, remote_path: str) -> bool:

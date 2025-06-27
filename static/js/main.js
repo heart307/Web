@@ -69,6 +69,16 @@ function updateUserDisplay() {
         if (usernameElement) {
             usernameElement.textContent = currentUser.username;
         }
+
+        // 根据用户角色显示/隐藏用户管理菜单
+        const userManagementNav = document.getElementById('user-management-nav');
+        if (userManagementNav) {
+            if (currentUser.role === 'admin' || currentUser.role === 'super_admin') {
+                userManagementNav.style.display = 'block';
+            } else {
+                userManagementNav.style.display = 'none';
+            }
+        }
     }
 }
 

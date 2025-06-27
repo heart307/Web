@@ -9,14 +9,30 @@
       "password": "YWRtaW4xMjM=",
       "protocol": "ftp",
       "group": "默认分组",
-      "status": "connected",
-      "last_check": "2025-06-26T23:32:06.131490",
-      "connection_time": 0.008002758026123047,
-      "last_error": null,
+      "status": "disconnected",
+      "last_check": "2025-06-27T20:43:23.645243",
+      "connection_time": 21.058784246444702,
+      "last_error": "[WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
       "created_by": "admin",
       "created_at": "2025-06-26T15:22:22.729792",
       "updated_at": "2025-06-26T19:41:07.930968"
+    },
+    {
+      "id": "site_000005",
+      "name": "site2",
+      "host": "127.0.0.1",
+      "port": 2121,
+      "username": "admin",
+      "password": "YWRtaW4xMjM=",
+      "protocol": "ftp",
+      "group": "默认分组",
+      "status": "connected",
+      "last_check": "2025-06-27T22:33:33.283817",
+      "connection_time": 0.004022359848022461,
+      "last_error": null,
+      "created_by": "admin",
+      "created_at": "2025-06-27T22:07:31.458535"
     }
   ],
-  "site_counter": 4
+  "site_counter": 6
 }

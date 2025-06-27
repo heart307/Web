@@ -38,7 +38,7 @@ async function loadTasks() {
         if (currentFilters.type !== 'all') {
             params.append('type', currentFilters.type);
         }
-        params.append('limit', pageSize * currentPage); // 获取更多数据用于分页
+        params.append('limit', 100); // 获取足够的数据用于前端分页
         
         const url = `/tasks/api/tasks?${params.toString()}`;
         console.log('Fetching tasks from:', url);
@@ -47,6 +47,22 @@ async function loadTasks() {
         console.log('Tasks data received:', data);
         
         tasksData = data.tasks || [];
+
+        // 去重处理：根据任务ID去除重复项
+        const uniqueTasks = [];
+        const seenIds = new Set();
+
+        for (const task of tasksData) {
+            const taskId = task.id || `${task.func_name}_${task.created_at}`;
+            if (!seenIds.has(taskId)) {
+                seenIds.add(taskId);
+                uniqueTasks.push(task);
+            } else {
+                console.warn('Duplicate task found and removed:', taskId);
+            }
+        }
+
+        tasksData = uniqueTasks;
         totalTasks = tasksData.length;
 
         // 验证任务数据结构

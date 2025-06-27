@@ -54,12 +54,23 @@ class DataManager:
                         'id': 'admin',
                         'username': 'admin',
                         'password_hash': 'pbkdf2:sha256:260000$8Uw5UJy1$4f45f7ce8a4e5b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c',  # admin123
-                        'role': 'admin',
+                        'role': 'super_admin',  # 升级为超级管理员
+                        'permissions': {
+                            'user_management': True,
+                            'site_management': True,
+                            'task_management': 'all',
+                            'system_config': True,
+                            'role_management': True
+                        },
                         'settings': {
                             'default_download_path': '/downloads',
-                            'max_concurrent_tasks': 3
+                            'max_concurrent_tasks': 3,
+                            'allowed_sites': []  # 空数组表示可访问所有站点
                         },
-                        'created_at': datetime.now().isoformat()
+                        'status': 'active',
+                        'created_at': datetime.now().isoformat(),
+                        'last_login': None,
+                        'created_by': 'system'
                     }
                 ],
                 'user_counter': 1
@@ -284,6 +295,98 @@ class DataManager:
             if user['username'] == username:
                 return user
         return None
+
+    def find_user_by_id(self, user_id: str) -> Optional[Dict]:
+        """根据用户ID查找用户"""
+        users = self.load_users()
+        for user in users:
+            if user['id'] == user_id:
+                return user
+        return None
+
+    def delete_user(self, user_id: str) -> bool:
+        """删除用户"""
+        with self.lock:
+            try:
+                data = self._load_json(self.files['users'])
+                if 'users' not in data:
+                    return False
+
+                # 查找要删除的用户
+                user_to_delete = None
+                for user in data['users']:
+                    if user['id'] == user_id:
+                        user_to_delete = user
+                        break
+
+                if not user_to_delete:
+                    return False
+
+                # 不能删除超级管理员
+                if user_to_delete['role'] == 'super_admin':
+                    return False
+
+                # 从列表中移除用户
+                data['users'] = [u for u in data['users'] if u['id'] != user_id]
+
+                self._atomic_write(self.files['users'], data)
+                return True
+
+            except Exception as e:
+                print(f"删除用户失败: {e}")
+                return False
+
+    def update_user_status(self, user_id: str, status: str) -> bool:
+        """更新用户状态"""
+        with self.lock:
+            try:
+                data = self._load_json(self.files['users'])
+                if 'users' not in data:
+                    return False
+
+                # 查找并更新用户状态
+                for user in data['users']:
+                    if user['id'] == user_id:
+                        user['status'] = status
+                        self._atomic_write(self.files['users'], data)
+                        return True
+
+                return False
+
+            except Exception as e:
+                print(f"更新用户状态失败: {e}")
+                return False
+
+    def update_user_last_login(self, user_id: str) -> bool:
+        """更新用户最后登录时间"""
+        with self.lock:
+            try:
+                data = self._load_json(self.files['users'])
+                if 'users' not in data:
+                    return False
+
+                # 查找并更新用户最后登录时间
+                for user in data['users']:
+                    if user['id'] == user_id:
+                        user['last_login'] = datetime.now().isoformat()
+                        self._atomic_write(self.files['users'], data)
+                        return True
+
+                return False
+
+            except Exception as e:
+                print(f"更新用户最后登录时间失败: {e}")
+                return False
+
+    def get_users_by_role(self, role: str) -> List[Dict]:
+        """根据角色获取用户列表"""
+        users = self.load_users()
+        return [user for user in users if user.get('role') == role]
+
+    def get_active_users(self) -> List[Dict]:
+        """获取活跃用户列表"""
+        users = self.load_users()
+        return [user for user in users if user.get('status', 'active') == 'active']
     
     def save_monitor(self, monitor: Dict):
         """保存监控任务"""

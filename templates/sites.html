@@ -195,6 +195,81 @@
     </div>
 </div>
 
+<!-- 添加站点模态框 -->
+<div class="modal fade" id="addSiteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">添加站点</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addSiteForm">
+                    <div class="mb-3">
+                        <label class="form-label">站点名称 *</label>
+                        <input type="text" class="form-control" id="add-site-name" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label class="form-label">主机地址 *</label>
+                                <input type="text" class="form-control" id="add-site-host" required>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">端口</label>
+                                <input type="number" class="form-control" id="add-site-port" value="21">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">用户名</label>
+                                <input type="text" class="form-control" id="add-site-username">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">密码</label>
+                                <input type="password" class="form-control" id="add-site-password">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">协议</label>
+                                <select class="form-select" id="add-site-protocol">
+                                    <option value="ftp">FTP</option>
+                                    <option value="ftps">FTPS</option>
+                                    <option value="sftp">SFTP</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">分组</label>
+                                <input type="text" class="form-control" id="add-site-group" value="默认分组">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submitAddSite()">
+                    <i class="bi bi-check"></i> 添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 编辑站点模态框 -->
 <div class="modal fade" id="editSiteModal" tabindex="-1">
     <div class="modal-dialog">

@@ -65,51 +65,7 @@
       "created_at": "2025-06-27T21:34:13.837105",
       "last_login": null,
       "created_by": "system"
-    },
-    {
-      "id": "user_000004",
-      "username": "管理员",
-      "password_hash": "9368d89f81f4ac62ffd706499f83fc3e6e03699441b2651c45570d8034e59ed0",
-      "role": "admin",
-      "permissions": {
-        "user_management": true,
-        "site_management": true,
-        "task_management": "all",
-        "system_config": false,
-        "role_management": false
-      },
-      "settings": {
-        "default_download_path": "/downloads",
-        "max_concurrent_tasks": 3,
-        "allowed_sites": []
-      },
-      "status": "active",
-      "created_at": "2025-06-27T23:58:48.750811",
-      "last_login": "2025-06-27T23:59:20.346192",
-      "created_by": "admin"
-    },
-    {
-      "id": "user_000006",
-      "username": "普通用户1",
-      "password_hash": "9368d89f81f4ac62ffd706499f83fc3e6e03699441b2651c45570d8034e59ed0",
-      "role": "user",
-      "permissions": {
-        "user_management": false,
-        "site_management": false,
-        "task_management": "own",
-        "system_config": false,
-        "role_management": false
-      },
-      "settings": {
-        "default_download_path": "/downloads",
-        "max_concurrent_tasks": 3,
-        "allowed_sites": []
-      },
-      "status": "active",
-      "created_at": "2025-06-27T23:59:48.673085",
-      "last_login": "2025-06-28T00:00:00.640727",
-      "created_by": "user_000004"
     }
   ],
-  "user_counter": 7
+  "user_counter": 3
 }

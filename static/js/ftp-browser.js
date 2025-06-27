@@ -254,13 +254,23 @@ async function loadFTPDirectory() {
     
     try {
         showLoadingInFileList();
-        
+
+        console.log('Making API request to browse directory:', {
+            siteId: siteId,
+            path: currentPath,
+            url: `/sites/api/sites/${siteId}/browse`
+        });
+
         const response = await apiRequest(`/sites/api/sites/${siteId}/browse`, {
             method: 'POST',
             body: JSON.stringify({ path: currentPath })
         });
-        
+
+        console.log('API response received:', response);
+
         ftpFileData = response.files || [];
+        console.log('File data processed:', ftpFileData);
+
         updateFileList(ftpFileData);
         updateBreadcrumb();
         updateNavigationButtons();

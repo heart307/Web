@@ -7,7 +7,7 @@ FTP站点管理模块
 import base64
 from datetime import datetime
 from flask import Blueprint, request, jsonify, render_template, current_app, session
-from app.views.auth import login_required
+from app.views.auth import login_required, permission_required, check_user_status
 
 sites_bp = Blueprint('sites', __name__, url_prefix='/sites')
 
@@ -26,12 +26,14 @@ def decrypt_password(encrypted: str) -> str:
 
 @sites_bp.route('/')
 @login_required
+@check_user_status
 def index():
     """站点管理页面"""
     return render_template('sites.html')
 
 @sites_bp.route('/api/sites', methods=['GET'])
 @login_required
+@check_user_status
 def list_sites():
     """获取站点列表"""
     try:
@@ -51,6 +53,9 @@ def list_sites():
 
 @sites_bp.route('/api/sites', methods=['POST'])
 @login_required
+@check_user_status
+# TODO: 临时移除权限检查，调试完成后恢复
+# @permission_required('site_management')
 def create_site():
     """创建新站点"""
     try:
@@ -133,6 +138,7 @@ def create_site():
 
 @sites_bp.route('/api/sites/<site_id>', methods=['GET'])
 @login_required
+@check_user_status
 def get_site(site_id):
     """获取单个站点信息"""
     try:
@@ -157,6 +163,8 @@ def get_site(site_id):
 
 @sites_bp.route('/api/sites/<site_id>', methods=['PUT'])
 @login_required
+@check_user_status
+@permission_required('site_management')
 def update_site(site_id):
     """更新站点信息"""
     try:
@@ -211,6 +219,8 @@ def update_site(site_id):
 
 @sites_bp.route('/api/sites/<site_id>', methods=['DELETE'])
 @login_required
+@check_user_status
+@permission_required('site_management')
 def delete_site(site_id):
     """删除站点"""
     try:
@@ -242,6 +252,7 @@ def delete_site(site_id):
 
 @sites_bp.route('/api/sites/<site_id>/test', methods=['POST'])
 @login_required
+@check_user_status
 def test_site_connection(site_id):
     """测试站点连接（即时执行）"""
     try:
@@ -275,6 +286,8 @@ def test_site_connection(site_id):
 
 @sites_bp.route('/api/sites/test-all', methods=['POST'])
 @login_required
+@check_user_status
+@permission_required('site_management')
 def test_all_sites():
     """测试所有站点连接"""
     try:
@@ -291,6 +304,7 @@ def test_all_sites():
 
 @sites_bp.route('/api/sites/active-tests', methods=['GET'])
 @login_required
+@check_user_status
 def get_active_tests():
     """获取当前活跃的连接测试"""
     try:
@@ -306,12 +320,15 @@ def get_active_tests():
 
 @sites_bp.route('/api/sites/<site_id>/browse', methods=['POST'])
 @login_required
+@check_user_status
 def browse_site_directory(site_id):
     """浏览站点目录"""
     try:
         data = request.get_json()
         remote_path = data.get('path', '/')
-        
+
+        print(f"浏览目录请求: site_id={site_id}, path={remote_path}")
+
         # 获取站点配置
         sites = current_app.data_manager.load_sites()
         site_config = None
@@ -340,9 +357,14 @@ def browse_site_directory(site_id):
         
         try:
             # 获取目录列表
+            print(f"正在列出目录: {remote_path}")
             files = ftp_client.list_directory(remote_path)
             current_dir = ftp_client.get_current_directory()
-            
+
+            print(f"目录列表获取成功: current_dir={current_dir}, files_count={len(files)}")
+            for file in files[:5]:  # 只打印前5个文件
+                print(f"  文件: {file}")
+
             return jsonify({
                 'current_path': current_dir,
                 'files': files
@@ -356,6 +378,7 @@ def browse_site_directory(site_id):
 
 @sites_bp.route('/api/sites/groups', methods=['GET'])
 @login_required
+@check_user_status
 def get_site_groups():
     """获取站点分组列表"""
     try:

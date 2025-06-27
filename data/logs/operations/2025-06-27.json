@@ -105,5 +105,61 @@
     "priority": "medium",
     "created_by": "admin",
     "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T20:43:23.652351",
+    "action": "connection_test",
+    "site_id": "site_000003",
+    "site_name": "site1",
+    "host": "192.168.2.55",
+    "status": "failed",
+    "connection_time": 21.058784246444702,
+    "error": "[WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。",
+    "tested_by": "admin"
+  },
+  {
+    "timestamp": "2025-06-27T22:07:31.461763",
+    "action": "create_site",
+    "site_id": "site_000005",
+    "site_name": "site2",
+    "host": "127.0.0.1",
+    "port": 2121,
+    "protocol": "ftp",
+    "group": "默认分组",
+    "created_by": "admin",
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-06-27T22:07:31.473424",
+    "action": "connection_test",
+    "site_id": "site_000005",
+    "site_name": "site2",
+    "host": "127.0.0.1",
+    "status": "success",
+    "connection_time": 0.005048274993896484,
+    "error": null,
+    "tested_by": "admin"
+  },
+  {
+    "timestamp": "2025-06-27T22:33:33.289355",
+    "action": "connection_test",
+    "site_id": "site_000005",
+    "site_name": "site2",
+    "host": "127.0.0.1",
+    "status": "success",
+    "connection_time": 0.004022359848022461,
+    "error": null,
+    "tested_by": "admin"
+  },
+  {
+    "timestamp": "2025-06-27T22:33:45.769689",
+    "action": "connection_test",
+    "site_id": "site_000005",
+    "site_name": "site2",
+    "host": "127.0.0.1",
+    "status": "success",
+    "connection_time": 0.022072315216064453,
+    "error": null,
+    "tested_by": "admin"
   }
 ]

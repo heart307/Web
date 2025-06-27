@@ -7,18 +7,54 @@
 import os
 from datetime import datetime
 from flask import Blueprint, request, jsonify, render_template, current_app, session
-from app.views.auth import login_required
+from app.views.auth import login_required, check_user_status
 
 tasks_bp = Blueprint('tasks', __name__, url_prefix='/tasks')
 
+def check_task_permission(task_id, action='view'):
+    """检查任务权限"""
+    try:
+        # 获取当前用户信息
+        current_user = current_app.data_manager.find_user_by_username(session.get('username'))
+        if not current_user:
+            return False, '用户不存在'
+
+        # 获取任务信息
+        task = current_app.scheduler.get_task_status(task_id)
+        if not task:
+            return False, '任务不存在'
+
+        # 检查权限
+        user_permissions = current_user.get('permissions', {})
+        task_management = user_permissions.get('task_management', 'own')
+
+        # 管理员可以操作所有任务
+        if task_management == 'all':
+            return True, None
+
+        # 普通用户只能操作自己的任务
+        if task_management == 'own':
+            if task.get('created_by') == session.get('username'):
+                return True, None
+            else:
+                return False, '权限不足：只能操作自己的任务'
+
+        # 无权限
+        return False, '无任务管理权限'
+
+    except Exception as e:
+        return False, f'权限检查失败: {str(e)}'
+
 @tasks_bp.route('/')
 @login_required
+@check_user_status
 def index():
     """任务管理页面"""
     return render_template('tasks.html')
 
 @tasks_bp.route('/api/tasks', methods=['GET'])
 @login_required
+@check_user_status
 def list_tasks():
     """获取任务列表"""
     try:
@@ -27,25 +63,40 @@ def list_tasks():
         priority = request.args.get('priority')
         task_type = request.args.get('type')
         limit = int(request.args.get('limit', 50))
-        
+
+        # 获取当前用户信息
+        current_user = current_app.data_manager.find_user_by_username(session.get('username'))
+        if not current_user:
+            return jsonify({'error': '用户不存在'}), 404
+
         # 获取所有任务
         all_tasks = current_app.scheduler.get_all_tasks()
-        
+
+        # 根据用户权限过滤任务
+        user_permissions = current_user.get('permissions', {})
+        task_management = user_permissions.get('task_management', 'own')
+
         # 过滤任务
         filtered_tasks = []
         for task in all_tasks:
+            # 权限过滤：普通用户只能看到自己的任务
+            if task_management == 'own':
+                if task.get('created_by') != session.get('username'):
+                    continue
+            # 管理员可以看到所有任务（task_management == 'all'）
+
             # 状态过滤
             if status and task.get('status') != status:
                 continue
-            
+
             # 优先级过滤
             if priority and str(task.get('priority', '')).lower() != priority.lower():
                 continue
-            
+
             # 类型过滤
             if task_type and task.get('task_type') != task_type:
                 continue
-            
+
             filtered_tasks.append(task)
         
         # 按创建时间排序
@@ -62,61 +113,85 @@ def list_tasks():
 
 @tasks_bp.route('/api/tasks/<task_id>', methods=['GET'])
 @login_required
+@check_user_status
 def get_task(task_id):
     """获取单个任务详情"""
     try:
+        # 检查权限
+        has_permission, error_msg = check_task_permission(task_id, 'view')
+        if not has_permission:
+            return jsonify({'error': error_msg}), 403
+
         task = current_app.scheduler.get_task_status(task_id)
-        
+
         if not task:
             return jsonify({'error': '任务不存在'}), 404
-        
+
         return jsonify({'task': task})
-        
+
     except Exception as e:
         return jsonify({'error': f'获取任务详情失败: {str(e)}'}), 500
 
 @tasks_bp.route('/api/tasks/<task_id>/pause', methods=['POST'])
 @login_required
+@check_user_status
 def pause_task(task_id):
     """暂停任务"""
     try:
+        # 检查权限
+        has_permission, error_msg = check_task_permission(task_id, 'control')
+        if not has_permission:
+            return jsonify({'error': error_msg}), 403
+
         success = current_app.scheduler.pause_task(task_id)
-        
+
         if success:
             return jsonify({'message': '任务已暂停'})
         else:
             return jsonify({'error': '暂停任务失败'}), 400
-        
+
     except Exception as e:
         return jsonify({'error': f'暂停任务失败: {str(e)}'}), 500
 
 @tasks_bp.route('/api/tasks/<task_id>/resume', methods=['POST'])
 @login_required
+@check_user_status
 def resume_task(task_id):
     """恢复任务"""
     try:
+        # 检查权限
+        has_permission, error_msg = check_task_permission(task_id, 'control')
+        if not has_permission:
+            return jsonify({'error': error_msg}), 403
+
         success = current_app.scheduler.resume_task(task_id)
-        
+
         if success:
             return jsonify({'message': '任务已恢复'})
         else:
             return jsonify({'error': '恢复任务失败'}), 400
-        
+
     except Exception as e:
         return jsonify({'error': f'恢复任务失败: {str(e)}'}), 500
 
 @tasks_bp.route('/api/tasks/<task_id>/cancel', methods=['POST'])
 @login_required
+@check_user_status
 def cancel_task(task_id):
     """取消任务"""
     try:
+        # 检查权限
+        has_permission, error_msg = check_task_permission(task_id, 'control')
+        if not has_permission:
+            return jsonify({'error': error_msg}), 403
+
         success = current_app.scheduler.cancel_task(task_id)
-        
+
         if success:
             return jsonify({'message': '任务已取消'})
         else:
             return jsonify({'error': '取消任务失败'}), 400
-        
+
     except Exception as e:
         return jsonify({'error': f'取消任务失败: {str(e)}'}), 500
 

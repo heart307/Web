@@ -488,3 +488,74 @@ async function loadSiteGroups() {
         console.error('Failed to load site groups:', error);
     }
 }
+
+// 刷新站点列表
+function refreshSites() {
+    loadSites();
+}
+
+// 显示添加站点模态框
+function showAddSiteModal() {
+    // 清空表单
+    document.getElementById('addSiteForm').reset();
+    document.getElementById('add-site-port').value = '21';
+    document.getElementById('add-site-group').value = '默认分组';
+
+    // 显示模态框
+    const modal = new bootstrap.Modal(document.getElementById('addSiteModal'));
+    modal.show();
+}
+
+// 提交添加站点
+async function submitAddSite() {
+    try {
+        const formData = {
+            name: document.getElementById('add-site-name').value.trim(),
+            host: document.getElementById('add-site-host').value.trim(),
+            port: parseInt(document.getElementById('add-site-port').value) || 21,
+            username: document.getElementById('add-site-username').value.trim(),
+            password: document.getElementById('add-site-password').value,
+            protocol: document.getElementById('add-site-protocol').value,
+            group: document.getElementById('add-site-group').value.trim() || '默认分组'
+        };
+
+        // 验证必填字段
+        if (!formData.name) {
+            showToast('error', '请输入站点名称');
+            return;
+        }
+
+        if (!formData.host) {
+            showToast('error', '请输入主机地址');
+            return;
+        }
+
+        // 发送请求
+        const response = await fetch('/sites/api/sites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            showToast('success', result.message || '站点添加成功');
+
+            // 关闭模态框
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addSiteModal'));
+            modal.hide();
+
+            // 刷新站点列表
+            loadSites();
+        } else {
+            showToast('error', result.error || '添加站点失败');
+        }
+
+    } catch (error) {
+        console.error('Add site error:', error);
+        showToast('error', '添加站点失败: ' + error.message);
+    }
+}
